@@ -1,0 +1,16 @@
+{
+  "name": "Message Passing",
+  "version": "1.0",
+  "description": "content scriptsとbackground pagesのやりとりができているかチェック",
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["page.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
