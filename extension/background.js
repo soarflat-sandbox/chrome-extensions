@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // ユーザーがページアクションをクリックした後でページとやり取りできるようにするには、activeTab権限を使用する。
 
   // onPageChangedはaddRules、removeRules、およびgetRulesで構成されるDeclarative Event APIを提供する。
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([{
       // アクションをトリガーできる条件のリスト。
       conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -23,9 +23,9 @@ chrome.runtime.onInstalled.addListener(() => {
         pageUrl: { hostEquals: 'developer.chrome.com' },
       })
       ],
-      // 対応する条件が満たされている間、拡張機能のページアクションを示す宣言的なイベントアクション。
-      // このアクションはホスト権限なしで使用できるが、拡張機能にはページアクションが必要。
+      // 対応する条件が満たされている間、拡張機能のページアクションを有効にする。
       // 拡張機能にactiveTab権限がある場合、ページアクションをクリックするとアクティブなタブへのアクセスが許可される。
+      // 今回の場合、該当したページを開いた時にポップアップが有効になり、開くことができる
       actions: [new chrome.declarativeContent.ShowPageAction()]
     }]);
   });
